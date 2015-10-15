@@ -3,10 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular2 playground</title>
+    <base href="/"></base>
 </head>
 
 <body>
-    <hello-app>Loading...</hello-app>
+    <style type="text/css">
+    .bloc {
+      width: 45%;
+      float: left;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid black;
+    }
+
+    .clearfix {
+      clear: both;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    .item {
+      background-color: #ddd;
+      padding: 5px;
+      margin: 5px;
+    }
+
+    .item .isselected {
+      background-color: red;
+    }
+
+    </style>
+
+
+    <movie-app>Loading...</movie-app>
 </body>
 
 <!-- ES6-related imports -->
@@ -14,13 +45,20 @@
 
 <script>
     //configure system loader
-    System.config({defaultJSExtensions: true});
+    System.config({
+      defaultJSExtensions: true,
+      map: {
+        'rx.all' : 'https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.0.1/rx.all.min.js',
+        'lodash' : '/node_modules/lodash/index.js'
+      }
+    });
 </script>
 <script src="/node_modules/angular2/bundles/angular2.min.js"></script>
+<script src="/node_modules/angular2/bundles/router.dev.js"></script>
 
 <script>
     //bootstrap the Angular2 application
-    System.import('dist/hello').catch(console.log.bind(console));
+    System.import('dist/MovieApp').catch(console.log.bind(console));
 </script>
 
 </html>

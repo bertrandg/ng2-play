@@ -2,7 +2,9 @@ var gulp = require('gulp');
 
 var PATHS = {
     src: 'src/**/*.ts',
-    typings: 'node_modules/angular2/bundles/typings/angular2/angular2.d.ts'
+    typings1: 'node_modules/angular2/bundles/typings/angular2/angular2.d.ts', 
+    typings2: 'node_modules/angular2/bundles/typings/angular2/router.d.ts',
+    typings3: 'typings/lodash/lodash.d.ts'
 };
 
 gulp.task('clean', function (done) {
@@ -12,16 +14,19 @@ gulp.task('clean', function (done) {
 
 gulp.task('ts2js', function () {
     var typescript = require('gulp-typescript');
-    var tsResult = gulp.src([PATHS.src, PATHS.typings])
+    var sourcemaps = require('gulp-sourcemaps');
+
+    gulp.src([PATHS.src, PATHS.typings1, PATHS.typings2, PATHS.typings3])
+        .pipe(sourcemaps.init())
         .pipe(typescript({
             noImplicitAny: true,
             module: 'system',
             target: 'ES5',
             emitDecoratorMetadata: true,
             experimentalDecorators: true
-        }));
-
-    return tsResult.js.pipe(gulp.dest('dist'));
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('play', ['ts2js'], function () {
@@ -30,7 +35,7 @@ gulp.task('play', ['ts2js'], function () {
     var serveStatic = require('serve-static');
     var open = require('open');
 
-    var port = 9000, app;
+    var port = 9006, app;
 
     gulp.watch(PATHS.src, ['ts2js']);
 
