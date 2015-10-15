@@ -22,6 +22,7 @@ gulp.task('ts2js', function () {
             noImplicitAny: true,
             module: 'system',
             target: 'ES5',
+            moduleResolution: 'node',
             emitDecoratorMetadata: true,
             experimentalDecorators: true
         }))
