@@ -4,7 +4,8 @@ var PATHS = {
     src: 'src/**/*.ts',
     typings1: 'node_modules/angular2/bundles/typings/angular2/angular2.d.ts', 
     typings2: 'node_modules/angular2/bundles/typings/angular2/router.d.ts',
-    typings3: 'typings/lodash/lodash.d.ts'
+    typings3: 'node_modules/angular2/bundles/typings/angular2/http.d.ts',
+    typings4: 'typings/lodash/lodash.d.ts'
 };
 
 gulp.task('clean', function (done) {
@@ -16,7 +17,7 @@ gulp.task('ts2js', function () {
     var typescript = require('gulp-typescript');
     var sourcemaps = require('gulp-sourcemaps');
 
-    gulp.src([PATHS.src, PATHS.typings1, PATHS.typings2, PATHS.typings3])
+    gulp.src([PATHS.src, PATHS.typings1, PATHS.typings2, PATHS.typings3, PATHS.typings4])
         .pipe(sourcemaps.init())
         .pipe(typescript({
             noImplicitAny: true,

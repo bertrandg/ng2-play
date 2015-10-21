@@ -19,7 +19,9 @@ import {MovieListComponent} from './movie/MovieListComponent';
       <div style="border: 1px solid #000; margin: 5px; padding: 5px;">
         <h2>We are inside the looper!!</h2>
         <a [router-link]="['./Looper']">Looper</a>
+        <a [router-link]="['./..']">BACK</a>
         <router-outlet></router-outlet>
+        <div class="clearfix"></div>
       </div>
     `
 })
