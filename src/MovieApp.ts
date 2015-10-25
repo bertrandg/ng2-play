@@ -1,6 +1,6 @@
 import {Component, View, bootstrap, NgFor, bind} from 'angular2/angular2';
 
-import {routerBindings, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {ROUTER_DIRECTIVES, RouteConfig, Router, Location, Route} from 'angular2/router';
 import {RouterOutlet, RouterLink} from 'angular2/router';
 
@@ -11,6 +11,7 @@ import {LoopRouteComponent} from './components/LoopRouteComponent';
 import {ArrayTestRouteComponent} from './components/ArrayTestRouteComponent';
 
 import {MovieListService, Movie} from './services/MovieListService';
+import {SegmentBuilderService} from './services/SegmentBuilderService';
 
 @Component({
   selector: 'movie-app'
@@ -44,4 +45,4 @@ export class MovieApp {
     onInit() {}
 }
   
-bootstrap(MovieApp, [MovieListService, routerBindings(MovieApp), bind(LocationStrategy).toClass(HashLocationStrategy)]);
+bootstrap(MovieApp, [MovieListService, SegmentBuilderService, ROUTER_PROVIDERS, bind(LocationStrategy).toClass(HashLocationStrategy)]);
