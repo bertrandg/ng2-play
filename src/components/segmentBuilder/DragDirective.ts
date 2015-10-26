@@ -1,6 +1,6 @@
 import {Directive, ElementRef} from 'angular2/angular2';
 
-import {SegmentBuilderService} from './../../services/SegmentBuilderService';
+import {SbElement, SegmentBuilderService} from './../../services/SegmentBuilderService';
 
 
 @Directive({
@@ -13,13 +13,14 @@ import {SegmentBuilderService} from './../../services/SegmentBuilderService';
   }
 })
 export class DragDirective {
+  drag:SbElement
 
   constructor(private segmentBuilder:SegmentBuilderService, private elRef: ElementRef) {}
 
   onInit() {}
 
   onDragStart(e:DragEvent) {
-    this.segmentBuilder.isDraggingElement = true;
+    this.segmentBuilder.draggingElement = this.drag;
 
     this.elRef.nativeElement.style.opacity = .5;
     this.elRef.nativeElement.style.outline = '1px solid red';
@@ -30,7 +31,7 @@ export class DragDirective {
   }
 
   onDragEnd(e:DragEvent) {
-    this.segmentBuilder.isDraggingElement = false;
+    setTimeout(():void => this.segmentBuilder.draggingElement = null);
 
     this.elRef.nativeElement.style.opacity = 1;
     this.elRef.nativeElement.style.outline = 0;

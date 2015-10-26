@@ -5,13 +5,16 @@ import {SbGroup, SbCriterion, SegmentBuilderService} from './../../services/Segm
 
 @Component({
   selector: 'sb-criterion',
-  properties: ['parentgroup', 'criterion']
+  properties: [
+    'parentgroup',
+    'criterion'
+  ]
 })
 @View({
     directives: [FORM_DIRECTIVES],
     template: `
       <p>
-        [{{ criterion.position }}] Criterion - 
+        [{{ criterion.position }}] Criterion ({{ criterion.id }}) - 
         <input type="text" [(ng-model)]="criterion.name" /> - 
         <button (click)="segmentBuilder.removeElement(parentgroup, criterion)">Suppr</button>
       </p>

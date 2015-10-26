@@ -5,13 +5,16 @@ import {SbGroup, SbSegment, SegmentBuilderService} from './../../services/Segmen
 
 @Component({
   selector: 'sb-segment',
-  properties: ['parentgroup', 'segment']
+  properties: [
+    'parentgroup',
+    'segment'
+  ]
 })
 @View({
     directives: [FORM_DIRECTIVES],
     template: `
       <p>
-        [{{ segment.position }}] Segment - 
+        [{{ segment.position }}] Segment ({{ segment.id }}) - 
         <input type="text" [(ng-model)]="segment.name" /> - 
         <button (click)="segmentBuilder.removeElement(parentgroup, segment)">Suppr</button>
       </p>

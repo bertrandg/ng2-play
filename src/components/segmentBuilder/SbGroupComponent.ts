@@ -10,42 +10,47 @@ import {SbGroup, SegmentBuilderService} from './../../services/SegmentBuilderSer
 
 @Component({
   selector: 'sb-group',
-  properties: ['parentgroup', 'group', 'level'],
+  properties: [
+    'parentgroup',
+    'group',
+    'level'
+  ],
   host: {
-    '[class]': '\'group level-\' + level'
+    '[class]': '\'level-\' + level'
   }
 })
 @View({
     directives: [NgIf, NgFor, SbCriterionComponent, SbSegmentComponent, SbGroupComponent, DragDirective, DropTargetDirective],
     template: `
         <p>
-          [{{ group.position }}] Group
+          [{{ group.position }}] Group ({{ group.id }})
           <button (click)="isOpen = !isOpen">{{ isOpen ? '-' : '+' }}</button>
           <button (click)="segmentBuilder.addElement(group, 'group')">+ Group</button>
           <button (click)="segmentBuilder.addElement(group, 'criterion')">+ Criterion</button>
           <button (click)="segmentBuilder.addElement(group, 'segment')">+ Segment</button>
           <button *ng-if="parentgroup" (click)="segmentBuilder.removeElement(parentgroup, group)">Suppr</button>
         </p>
-        <div [hidden]="!isOpen">
-          <drop-target>QQQQ</drop-target>
+        <div class="group-children" [hidden]="!isOpen">
+          <drop-target [group]="group" index="0">{{ '0 - ' + group.id }}</drop-target>
 
-          <div *ng-for="#m of group.children" style="position: relative;">
-            <sb-criterion 
-                  *ng-if="m.type == 'criterion'" 
+          <template ng-for #m [ng-for-of]="group.children" #i="index">
+
+            <sb-criterion *ng-if="m.type == 'criterion'" 
                   [parentgroup]="group" [criterion]="m"
                   [drag]="m"></sb-criterion>
 
-            <sb-segment 
-                  *ng-if="m.type == 'segment'" 
+            <sb-segment *ng-if="m.type == 'segment'" 
                   [parentgroup]="group" [segment]="m"
                   [drag]="m"></sb-segment>
 
-            <sb-group 
-                  *ng-if="m.type == 'group'" 
+            <sb-group *ng-if="m.type == 'group'" 
                   [parentgroup]="group" [group]="m" [level]="level + 1"
                   [drag]="m"></sb-group>
 
-            <drop-target></drop-target>
+            <drop-target [group]="group" [index]="i + 1">{{ (i + 1) + ' - ' + group.id }}</drop-target>
+
+          </template>
+
           </div>
         </div>
     `
@@ -61,7 +66,6 @@ export class SbGroupComponent {
 
   onInit() {
       this.level = Number(this.level);
-      console.log('>>> ', this.parentgroup);
   }
 }
 
@@ -69,4 +73,6 @@ export class SbGroupComponent {
               <sb-criterion [ng-switch-when]="'criterion'" [criterion]="m"></sb-criterion>
               <sb-segment [ng-switch-when]="'segment'" [segment]="m"></sb-segment>
               <sb-group [ng-switch-when]="'group'" [group]="m"></sb-group>
+
+          <div *ng-for="#m of group.children; #i = index">
 */
