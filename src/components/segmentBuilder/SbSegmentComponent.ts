@@ -1,4 +1,4 @@
-import {Component, View, NgFor, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 
 import {SbGroup, SbSegment, SegmentBuilderService} from './../../services/SegmentBuilderService';
 
@@ -8,10 +8,13 @@ import {SbGroup, SbSegment, SegmentBuilderService} from './../../services/Segmen
   properties: [
     'parentgroup',
     'segment'
-  ]
+  ],
+  host: {
+    '[class.recentAction]': 'segment.recentAction'
+  }
 })
 @View({
-    directives: [FORM_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
     template: `
       <p>
         [{{ segment.position }}] Segment ({{ segment.id }}) - 

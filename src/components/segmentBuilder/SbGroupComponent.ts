@@ -1,4 +1,4 @@
-import {Component, View, NgIf, NgFor, NgSwitch, NgSwitchWhen} from 'angular2/angular2';
+import {Component, View, NgIf, NgFor, ElementRef} from 'angular2/angular2';
 
 import {SbCriterionComponent} from './SbCriterionComponent';
 import {SbSegmentComponent} from './SbSegmentComponent';
@@ -16,7 +16,8 @@ import {SbGroup, SegmentBuilderService} from './../../services/SegmentBuilderSer
     'level'
   ],
   host: {
-    '[class]': '\'level-\' + level'
+    //'[class]': '\'level-\' + level',
+    '[class.recentAction]': 'group.recentAction'
   }
 })
 @View({
@@ -62,9 +63,11 @@ export class SbGroupComponent {
   level:number
   isOpen:boolean = true
 
-  constructor(private segmentBuilder:SegmentBuilderService) {}
+  constructor(private segmentBuilder:SegmentBuilderService, public elRef:ElementRef) {}
 
   onInit() {
+      // probleme > qd déplacé, le premier level reste et on ajoute son nouveau...
+      this.elRef.nativeElement.classList.add('level-' + this.level);
       this.level = Number(this.level);
   }
 }

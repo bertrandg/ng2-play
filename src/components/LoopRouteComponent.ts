@@ -2,7 +2,7 @@ import {Component, View} from 'angular2/angular2';
 import {ROUTER_DIRECTIVES, RouteConfig, Router, Location, Route} from 'angular2/router';
 import {RouterOutlet, RouterLink} from 'angular2/router';
 
-import {MovieListComponent} from './movie/MovieListComponent';
+import {LoopComponent} from './loop/LoopComponent';
 
 
 @Component({
@@ -10,7 +10,8 @@ import {MovieListComponent} from './movie/MovieListComponent';
 })
 
 @RouteConfig([
-  { path: '/looper', component: MovieListComponent, as: 'Looper' }
+  { path: '/', component: LoopComponent, as: 'LooperHome' },
+  { path: '/looper/...', component: LoopRouteComponent, as: 'Looper' }
 ])
 
 @View({
@@ -18,10 +19,9 @@ import {MovieListComponent} from './movie/MovieListComponent';
     template: `
       <div style="border: 1px solid #000; margin: 5px; padding: 5px;">
         <h2>We are inside the looper!!</h2>
-        <a [router-link]="['./Looper']">Looper</a>
-        <a [router-link]="['./..']">BACK</a>
+        <button [router-link]="['./Looper/LooperHome']">Click on the button to go deeper..</button>
+        <button [router-link]="['./LooperHome']">BACK</button>
         <router-outlet></router-outlet>
-        <div class="clearfix"></div>
       </div>
     `
 })

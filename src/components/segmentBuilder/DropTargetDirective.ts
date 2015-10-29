@@ -10,7 +10,7 @@ import {SbGroup, SbCriterion, SegmentBuilderService} from './../../services/Segm
     'index'
   ],
   host: {
-    '[hidden]': '!segmentBuilder.draggingElement',
+    '[class.hideMe]': '!segmentBuilder.draggingElement',
     '(dragenter)': 'onDragEnter($event)',
     '(dragleave)': 'onDragLeave($event)',
     '(dragover)': 'onDragOver($event)',

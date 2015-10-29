@@ -8,7 +8,10 @@ import {SbGroup, SbCriterion, SegmentBuilderService} from './../../services/Segm
   properties: [
     'parentgroup',
     'criterion'
-  ]
+  ],
+  host: {
+    '[class.recentAction]': 'criterion.recentAction'
+  }
 })
 @View({
     directives: [FORM_DIRECTIVES],

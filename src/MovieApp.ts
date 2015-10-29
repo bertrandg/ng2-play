@@ -33,7 +33,7 @@ import {SegmentBuilderService} from './services/SegmentBuilderService';
       <ul>
         <li><a [router-link]="['./Home']">Home</a></li>
         <li><a [router-link]="['./List']">Liste</a></li>
-        <li><a [router-link]="['./Loop/Looper']">Loop</a></li>
+        <li><a [router-link]="['./Loop/LooperHome']">Loop</a></li>
         <li><a [router-link]="['./ArrayTest']">Array test</a></li>
       </ul> 
       <router-outlet></router-outlet>

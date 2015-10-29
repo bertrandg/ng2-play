@@ -42,13 +42,26 @@
       display: block;
     }
 
+    sb-criterion,
+    sb-segment {
+      background-color: rgba(255, 255, 255, .2);
+    }
+
+    .recentAction {
+      background-color: red !important;
+    }
+
     drop-target {
       position: absolute;
+      display: block;
       height: 10px;
       left: -30px;
       background-color: grey;
       width: 10%;
       z-index: 100;
+    }
+    drop-target.hideMe {
+      display: none;
     }
 
     sb-group {
