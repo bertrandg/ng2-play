@@ -34,7 +34,7 @@ import {SbGroup, SegmentBuilderService} from './../../services/SegmentBuilderSer
         <div class="group-children" [hidden]="!isOpen">
           <drop-target [group]="group" index="0">{{ '0 - ' + group.id }}</drop-target>
 
-          <template ng-for #m [ng-for-of]="group.children" #i="index">
+          <div *ng-for="#m of group.children; #i = index">
 
             <sb-criterion *ng-if="m.type == 'criterion'" 
                   [parentgroup]="group" [criterion]="m"
@@ -50,7 +50,7 @@ import {SbGroup, SegmentBuilderService} from './../../services/SegmentBuilderSer
 
             <drop-target [group]="group" [index]="i + 1">{{ (i + 1) + ' - ' + group.id }}</drop-target>
 
-          </template>
+          </div>
 
           </div>
         </div>
@@ -78,4 +78,7 @@ export class SbGroupComponent {
               <sb-group [ng-switch-when]="'group'" [group]="m"></sb-group>
 
           <div *ng-for="#m of group.children; #i = index">
+
+          <template ng-for #m [ng-for-of]="group.children" #i="index">
+          </template>
 */

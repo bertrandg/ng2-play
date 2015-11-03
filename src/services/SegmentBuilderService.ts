@@ -39,8 +39,8 @@ export class SegmentBuilderService {
   constructor() {
       this.rootGroup = new SbGroup(0, GroupRelation.And, [
             new SbCriterion(0, 'Mon Voisin Totoro'),
-            new SbCriterion(1, 'Tueurs nés'),
-            new SbSegment(2, 'Segment films anciens'),
+            //new SbCriterion(1, 'Tueurs nés'),
+            //new SbSegment(2, 'Segment films anciens'),
             new SbGroup(3, GroupRelation.None, [
                   new SbGroup(0, GroupRelation.Or, [
                         new SbSegment(0, 'Segment films espagnols'),
@@ -49,17 +49,17 @@ export class SegmentBuilderService {
                   new SbCriterion(1, 'Le fils de l\'Homme'),
                   new SbSegment(2, 'Segment films d\'animations'),
             ]),
-            new SbGroup(4, GroupRelation.None, [
+            /*new SbGroup(4, GroupRelation.None, [
                   new SbGroup(0, GroupRelation.And, [
                         new SbSegment(0, 'Segment films muets')
                   ]),
                   new SbCriterion(1, 'Mulan')
-            ])
+            ])*/
       ]);
   }
 
   public removeElement(parentGroup:SbGroup, elem:SbElement):SbElement {
-    let index = parentGroup.children.indexOf(elem);
+    let index:number = parentGroup.children.indexOf(elem);
     if (index !== -1) {
         return parentGroup.children.splice(index, 1)[0];
     }
@@ -115,15 +115,35 @@ export class SegmentBuilderService {
           throw Error('Try to move an element on the same position.. don\'t move it!');
       }
       else {
+          let newPosition: number;
+
           // si le nouveau index est inférieur à l\'actuel
-          // alors on a juste a le remove et l'injecter et maj sa prop position
-          if(destIndex < currIndex) {
-              console.log('déplacement en amont: destIndex=', destIndex, ' / currIndex=', currIndex);
+          // alors on a juste à maj sa prop position
+
+          // TOOD switch avec index 0, last, interieur avant actuel, interieur apres actuel!!!
+
+          switch(true) {
+              case (destIndex == 0):
+                  console.log('déplacement au début: destIndex=', destIndex, ' / currIndex=', currIndex);
+                  newPosition = X;
+                  break;
+              case (destIndex == group.children.length):
+                  console.log('déplacement à la fin: destIndex=', destIndex, ' / currIndex=', currIndex);
+                  newPosition = X;
+                  break;
+              case (destIndex < currIndex):
+                  console.log('déplacement en amont: destIndex=', destIndex, ' / currIndex=', currIndex);
+                  newPosition = (group.children[destIndex - 1].position + group.children[destIndex].position)/2;
+                  break;
+              default:
+                  console.log('déplacement en aval: destIndex=', destIndex, ' / currIndex=', currIndex);
+                  newPosition = X;
+                  break;
           }
-          // sinon étape supplémentaire
-          else {
-              console.log('déplacement en aval: destIndex=', destIndex, ' / currIndex=', currIndex);
-          }
+
+          elemToMove.position = newPosition;
+          this._sortGroupByPosition(group);
+          this._highlightRecentAction(elemToMove);
       }
   }
 
