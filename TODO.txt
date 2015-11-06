@@ -1,0 +1,8 @@
+TODO
+
+- add uuid npm package for elements id
+- upgrade bootstrap to 4-alpha
+- droptarget ne doivent pas s'affichées si à la meme place ou si à l'intérieur du groupe déplacé
+- droptarget doit s'highlight en hover
+
+- ajout TSLint !!!
