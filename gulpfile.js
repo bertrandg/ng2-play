@@ -38,3 +38,20 @@ gulp.task('play', ['ts2js'], function () {
     });
 });
 
+gulp.task('tslint', function(){
+    var tslint = require('gulp-tslint');
+    var fs = require('fs');
+
+    const reportOptions = {
+        emitError: false,
+        reportLimit: 20,
+        summarizeFailureOutput: false
+    };
+
+    var report = gulp.src(PATHS.src)
+                    .pipe(tslint())
+                    .pipe(tslint.report('json', reportOptions))
+                    .pipe(gulp.dest('log'));
+                    //.pipe(fs.writeFileSync('log.json'));
+});
+
