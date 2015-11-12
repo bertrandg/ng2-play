@@ -27,6 +27,7 @@ node_modules/angular2/bundles/*
 node_modules/bootstrap/*
 !node_modules/bootstrap/dist
 node_modules/bootstrap/dist/*
+!node_modules/bootstrap/dist/fonts
 !node_modules/bootstrap/dist/css
 node_modules/bootstrap/dist/css/*
 !node_modules/bootstrap/dist/css/bootstrap.min.css
