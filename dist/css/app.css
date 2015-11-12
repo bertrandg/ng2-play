@@ -1,0 +1,116 @@
+
+.bloc {
+  width: 45%;
+  float: left;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.clearfix {
+  clear: both;
+}
+
+h3, ul {
+  margin: 0;
+}
+
+.item {
+  background-color: #ddd;
+  padding: 5px;
+  margin: 5px;
+}
+
+.item .isselected {
+  background-color: red;
+}
+
+/*********************************/
+
+sb-criterion,
+sb-segment,
+sb-group {
+  position: relative;
+  display: block;
+}
+
+sb-criterion,
+sb-segment {
+  padding: 2px;
+  margin: 2px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+}
+sb-criterion > div,
+sb-segment > div {
+  background-color: #efefef;
+  padding: 2px;
+}
+
+.recentAction {
+  border-color: red !important;
+}
+
+drop-target {
+  position: relative;
+  display: block;
+  height: 2px;
+  left: -30px;
+  width: 10%;
+  z-index: 100;
+}
+drop-target > div {
+  display: none !important;
+  postion: relative;
+  top: -15px !important;
+  height: 30px;
+  font-size: 30px;
+  color: grey;
+}
+drop-target.showMe > div {
+  display: block !important;
+}
+drop-target.hoverMe > div {
+  color: red;
+}
+
+.draggingMe drop-target > div {
+  display: none !important;
+}
+
+sb-group {
+  display: block;
+  border: 1px solid #999999;
+  margin: 2px;
+  padding: 2px;
+}
+
+sb-group p {
+  margin: 5px;
+}
+
+.panel {
+  margin-bottom: 5px;
+}
+
+.panel-body {
+  position: relative;
+  padding: 5px 15px;
+}
+.panel-body > div {
+  postion: relative;
+}
+
+.btn-danger {
+  float: right;
+}
+
+/*
+sb-group.level-0 { background-color: #cccccc; }
+sb-group.level-1 { background-color: #bbbbbb; }
+sb-group.level-2 { background-color: #aaaaaa; }
+sb-group.level-3 { background-color: #999999; }
+sb-group.level-4 { background-color: #888888; }
+*/
+
+
