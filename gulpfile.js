@@ -55,3 +55,27 @@ gulp.task('tslint', function(){
                     //.pipe(fs.writeFileSync('log.json'));
 });
 
+gulp.task('tslint-output', function(){
+    var tslint = require('gulp-tslint');
+    var map = require('map-stream');
+    var concat = require('gulp-concat');
+
+    return gulp.src(PATHS.src)
+        .pipe(tslint())
+        .pipe(map(function(file, done) {
+            // Add the tslint errors in prose format
+            if (file.tslint.output) {
+                file.contents = new Buffer(
+                    JSON.parse(file.tslint.output)
+                        .map(tslint.proseErrorFormat).join('\n')
+                );
+            } else {
+                file.contents = new Buffer("");
+            }
+
+            done(null, file);
+        }))
+        // Concat and save the errors
+        .pipe(concat('tslint-report.txt'))
+        .pipe(gulp.dest('./'));
+});
